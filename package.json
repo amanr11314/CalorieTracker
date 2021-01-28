@@ -1,8 +1,13 @@
 {
-  "name": "react-live-3",
+  "name": "calorie-tracker",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "Calorie Tracker is a beginner React project to understand working of different concepts in React.",
+  "keywords": [
+    "health",
+    "food",
+    "styled-components",
+    "react"
+  ],
   "main": "src/index.js",
   "dependencies": {
     "babel-plugin-styled-components": "1.12.0",
