@@ -1,57 +1,43 @@
 import React from "react";
-import FoodPill from "./food-pill";
-import calorieData from "./data/calorie-data";
 import "./styles.css";
+import foodData from "./data/calorie-data";
+import HeaderElement from "./components/header-element";
+import TotalCalories from "./components/total-calories";
+import FoodTable from "./components/food-table";
+import FoodClicked from "./components/food-clicked";
 
-function LiveHeader(props) {
-  return <h1> {props.header} </h1>;
-}
-
-function FoodClicked(props) {
-  const { foodClicked } = props;
-  return <h2>{foodClicked}</h2>;
-}
-
-function TotalCalories({ totalCalories }) {
-  return <h2>{totalCalories}</h2>;
-}
-
-function FoodTable({ calorieData, onFoodPillClicked }) {
-  return calorieData
-    .slice(0, 10)
-    .map(({ name, measure, calories }) => (
-      <FoodPill
-        key={name}
-        name={name}
-        measure={measure}
-        calories={calories}
-        onFoodPillClick={onFoodPillClicked}
-      />
-    ));
-}
-
+import styled from "styled-components";
+const MainContent = styled.div`
+  box-sizing: border-box;
+  color: #ecfdf9;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  margin-top: 15px;
+  align-items: center;
+`;
 export default class App extends React.Component {
   state = {
-    foodClicked: "nothing",
+    foodClicked: null,
     totalCalories: 0
   };
 
   onFoodPillClickHandler = (name, calories) => {
-    const newCalories = this.state.totalCalories + calories
+    const newCalories = this.state.totalCalories + calories;
     this.setState({ foodClicked: name, totalCalories: newCalories });
   };
 
   render() {
     return (
-      <div className="App">
-        <LiveHeader header={"Welcome to live"} />
+      <MainContent className="App">
+        <HeaderElement header={"Calorie Tracker"} />
         <FoodTable
-          calorieData={calorieData}
+          calorieData={foodData}
           onFoodPillClicked={this.onFoodPillClickHandler}
         />
         <FoodClicked foodClicked={this.state.foodClicked} />
         <TotalCalories totalCalories={this.state.totalCalories} />
-      </div>
+      </MainContent>
     );
   }
 }
